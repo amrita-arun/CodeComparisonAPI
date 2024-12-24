@@ -5,16 +5,6 @@ from parsers.parser import extract_code_snippets, extract_text_with_pymupdf, get
 app = FastAPI()
 
 
-# Add CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Adjust this to your frontend's origin
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
 @app.post("/parse-files")
 async def parse_files(pdf: UploadFile = File(...), code: UploadFile = File(...)):
     pdf_path = f"/tmp/{pdf.filename}"
